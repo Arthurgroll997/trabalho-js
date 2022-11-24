@@ -1,0 +1,28 @@
+{
+  "name": "trabalho_js",
+  "version": "1.0.0",
+  "description": "Trabalho JS do III trimestre de programação do IFRS Campus Canoas",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node main.js",
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/Arthurgroll997/trabalho-js.git"
+  },
+  "author": "Arthur Von Groll, Milena Schmitt Scheidt e Vinícius Amorim da Silveira",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Arthurgroll997/trabalho-js/issues"
+  },
+  "homepage": "https://github.com/Arthurgroll997/trabalho-js#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "vitest": "^0.25.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
