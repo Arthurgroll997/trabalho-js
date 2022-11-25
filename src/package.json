@@ -4,6 +4,7 @@
   "description": "Trabalho JS do III trimestre de programação do IFRS Campus Canoas",
   "type": "module",
   "scripts": {
+    "release": "node release.js",
     "dev": "node main.js",
     "test": "vitest"
   },
