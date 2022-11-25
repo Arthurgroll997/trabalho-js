@@ -2,7 +2,6 @@
   "name": "trabalho_js",
   "version": "1.0.0",
   "description": "Trabalho JS do III trimestre de programação do IFRS Campus Canoas",
-  "main": "main.js",
   "type": "module",
   "scripts": {
     "dev": "node main.js",
