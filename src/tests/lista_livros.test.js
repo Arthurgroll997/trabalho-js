@@ -74,8 +74,116 @@ describe("Lista de livros", () => {
 
         expect(listaLivros.getBooksReadCount()).toBe(1);
         expect(listaLivros.getCurrentBook()).toStrictEqual(listaLivrosEsperada[1]);
-        expect(listaLivros.getBooksRead()).toStrictEqual([listaLivrosEsperada[3], listaLivrosEsperada[0]]);
+        expect(listaLivros.getBooksRead()).toStrictEqual([listaLivrosEsperada[3],
+            new Livro(dateMgr, {
+                titulo: "Ser ou não ser: Eis a questão",
+                autor: "Pablo",
+                genero: "Filosofia",
+                lido: true,
+                dataFinalizacao: 1337,
+            })
+        ]);
         expect(listaLivros.getBooksToRead()).toStrictEqual([listaLivrosEsperada[2]]);
-        expect(listaLivros.getLastReadBook()).toStrictEqual(listaLivrosEsperada[0]);
+        expect(listaLivros.getLastReadBook()).toStrictEqual(
+            new Livro(dateMgr, {
+                titulo: "Ser ou não ser: Eis a questão",
+                autor: "Pablo",
+                genero: "Filosofia",
+                lido: true,
+                dataFinalizacao: 1337,
+            })
+        );
+    });
+
+    it("Deve saber operar com livros já existentes previamente no localStorage", () => {
+        let listaLivrosEsperada = [
+            new Livro(dateMgr, {
+                titulo: "Ser ou não ser: Eis a questão",
+                autor: "Pablo",
+                genero: "Filosofia",
+                lido: false,
+                dataFinalizacao: null,
+            }),
+            new Livro(dateMgr, {
+                titulo: "XGH vs TDD: Qual escolher para um projeto escalável importante?",
+                genero: "Científico/Técnico",
+                autor: "Arthur",
+                lido: false,
+                dataFinalizacao: null,
+            }),
+            new Livro(dateMgr, {
+                titulo: "As raivas de passar fazendo teste e não saber o porquê de falhar",
+                genero: "Científico/Técnico",
+                autor: "Arthur",
+                lido: false,
+                dataFinalizacao: null,
+            }),
+            new Livro(dateMgr, {
+                titulo: "O viajante intergaláctico",
+                autor: "Milena",
+                genero: "Ficção Científica",
+                lido: true,
+                dataFinalizacao: dateMgr.getTime()
+            }),
+        ];
+
+        listaLivros.nativeStorage.setItem("curBook",
+            new Livro(dateMgr, {
+                titulo: "Ser ou não ser: Eis a questão",
+                autor: "Pablo",
+                genero: "Filosofia",
+                lido: false,
+                dataFinalizacao: false,
+            }),
+        );
+        listaLivros.nativeStorage.setItem("booksRead", [
+            new Livro(dateMgr, {
+                titulo: "O viajante intergaláctico",
+                autor: "Milena",
+                genero: "Ficção Científica",
+                lido: true,
+                dataFinalizacao: dateMgr.getTime()
+            }),
+        ]);
+        listaLivros.nativeStorage.setItem("booksToRead", [
+            new Livro(dateMgr, {
+                titulo: "XGH vs TDD: Qual escolher para um projeto escalável importante?",
+                genero: "Científico/Técnico",
+                autor: "Arthur",
+                lido: false,
+                dataFinalizacao: null,
+            }),
+            new Livro(dateMgr, {
+                titulo: "As raivas de passar fazendo teste e não saber o porquê de falhar",
+                genero: "Científico/Técnico",
+                autor: "Arthur",
+                lido: false,
+                dataFinalizacao: null,
+            }),
+        ]);
+
+        listaLivros.finishBook();
+
+        expect(listaLivros.getBooksReadCount()).toBe(1);
+        expect(listaLivros.getCurrentBook()).toStrictEqual(listaLivrosEsperada[1]);
+        expect(listaLivros.getBooksRead()).toStrictEqual([listaLivrosEsperada[3], 
+            new Livro(dateMgr, {
+                titulo: "Ser ou não ser: Eis a questão",
+                autor: "Pablo",
+                genero: "Filosofia",
+                lido: true,
+                dataFinalizacao: 1337,
+            })
+        ]);
+        expect(listaLivros.getBooksToRead()).toStrictEqual([listaLivrosEsperada[2]]);
+        expect(listaLivros.getLastReadBook()).toStrictEqual(
+            new Livro(dateMgr, {
+                titulo: "Ser ou não ser: Eis a questão",
+                autor: "Pablo",
+                genero: "Filosofia",
+                lido: true,
+                dataFinalizacao: 1337,
+            })
+        );
     });
 });
